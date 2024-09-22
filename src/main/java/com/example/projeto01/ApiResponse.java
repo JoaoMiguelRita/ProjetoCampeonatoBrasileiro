@@ -1,9 +1,10 @@
 package com.example.projeto01;
 
-// Chat mandou fazer para buscar o erro
+import java.util.List;
+
 public class ApiResponse {
-    private String message; // Campo para mensagens de erro
-    private Object data; // Campo para armazenar dados do campeonato ou qualquer outra resposta
+    private String message;
+    private List<Posicao> data;
 
     // Getters e Setters
     public String getMessage() {
@@ -14,11 +15,11 @@ public class ApiResponse {
         this.message = message;
     }
 
-    public Object getData() {
+    public List<Posicao> getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(List<Posicao> data) {
         this.data = data;
     }
 }
