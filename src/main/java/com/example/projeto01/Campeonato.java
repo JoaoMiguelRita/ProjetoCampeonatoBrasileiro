@@ -1,34 +1,19 @@
 package com.example.projeto01;
 
 public class Campeonato {
-    private int id;
-    private String nome;
-    private String temporada;
+    private Grupo grupoPrincipal;
 
     // -------------------------------------------- //
-    // Getters
-    public int getId(){
-        return id;
+    // Getters e Settes
+
+    public Grupo getGrupoPrincipal(){
+        return grupoPrincipal;
     }
 
-    public String getNome(){
-        return nome;
+
+    public void setGrupoPrincipal(Grupo grupoPrincipal) {
+        this.grupoPrincipal = grupoPrincipal;
     }
 
-    public String getTemporada() {
-        return temporada;
-    }
-    // Setters
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTemporada(String temporada) {
-        this.temporada = temporada;
-    }
     // -------------------------------------------- //
 }
