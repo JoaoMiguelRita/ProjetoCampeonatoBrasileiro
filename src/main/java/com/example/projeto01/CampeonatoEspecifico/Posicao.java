@@ -1,4 +1,4 @@
-package com.example.projeto01;
+package com.example.projeto01.CampeonatoEspecifico;
 
 import java.util.List;
 

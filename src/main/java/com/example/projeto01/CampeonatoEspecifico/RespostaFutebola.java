@@ -1,4 +1,4 @@
-package com.example.projeto01;
+package com.example.projeto01.CampeonatoEspecifico;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -325,5 +325,28 @@ public class RespostaFutebola {
         public void setTipo(String tipo) {
             this.tipo = tipo;
         }
+    }
+
+
+    public String formatarMensagem() {
+
+        StringBuilder mensagem = new StringBuilder();
+            mensagem.append("<div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;'>");
+            mensagem.append("<h3>").append(time.getNomePopular()).append(" (").append(time.getSigla()).append(")</h3>");
+            mensagem.append("<p><strong>ID do Time:</strong> ").append(time.getTimeId()).append("</p>");
+            mensagem.append("<ul>");
+            mensagem.append("<li><strong>Jogos:</strong> ").append(jogos).append("</li>");
+            mensagem.append("<li><strong>Vitórias:</strong> ").append(vitorias).append("</li>");
+            mensagem.append("<li><strong>Empates:</strong> ").append(empates).append("</li>");
+            mensagem.append("<li><strong>Derrotas:</strong> ").append(derrotas).append("</li>");
+            mensagem.append("<li><strong>Aproveitamento:</strong> ").append(String.format("%.2f%%", aproveitamento)).append("</li>");
+            mensagem.append("<li><strong>Gols a favor:</strong> ").append(golsPro).append("</li>");
+            mensagem.append("<li><strong>Gols contra:</strong> ").append(golsContra).append("</li>");
+            mensagem.append("<li><strong>Saldo de gols:</strong> ").append(saldoGols).append("</li>");
+            mensagem.append("<li><strong>Variação de posição:</strong> ").append(variacaoPosicao).append("</li>");
+            mensagem.append("<li><strong>Últimos jogos:</strong> ").append(String.join(", ", ultimosJogos)).append("</li>");
+            mensagem.append("</ul>");
+            mensagem.append("</div>");
+            return mensagem.toString();
     }
 }

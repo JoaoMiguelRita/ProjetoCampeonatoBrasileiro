@@ -1,7 +1,7 @@
 package com.example.projeto01.Services;
 
-import com.example.projeto01.RespostaFutebola;
-import com.example.projeto01.Time;
+import com.example.projeto01.CampeonatoEspecifico.RespostaFutebola;
+import com.example.projeto01.CampeonatoEspecifico.Time;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;

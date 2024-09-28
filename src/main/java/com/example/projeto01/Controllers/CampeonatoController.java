@@ -1,8 +1,8 @@
 package com.example.projeto01.Controllers;
 
-import com.example.projeto01.RespostaFutebola;
+import com.example.projeto01.CampeonatoEspecifico.RespostaFutebola;
 import com.example.projeto01.Services.CampeonatoService;
-import com.example.projeto01.Time;
+import com.example.projeto01.CampeonatoEspecifico.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,21 +35,27 @@ public class CampeonatoController {
     }
 
     @GetMapping("/campeonato")
-    public ResponseEntity<List<RespostaFutebola>> getCampeonato(@RequestParam int id) {
+    public String getCampeonato(@RequestParam int id){
+    /*   public ResponseEntity<List<RespostaFutebola>> getCampeonato(@RequestParam int id) {   */
         try {
             System.out.println("Recebendo Campeonato id: " + id);
             List<RespostaFutebola> tabela = campeonatoService.getEndereco(id);
 
+            StringBuilder mensagens = new StringBuilder();
+            for (RespostaFutebola resposta : tabela) {
+                mensagens.append(resposta.formatarMensagem()).append("\n\n");
+            }
+
             if (tabela == null || tabela.isEmpty()) {
                 System.out.println("Tabela retornou nula ou vazia");
-                return ResponseEntity.notFound().build();
+                return null; /* ResponseEntity.notFound().build(); */
             } else {
                 System.out.println("Retornando dados da tabela");
-                return ResponseEntity.ok(tabela);
+                return mensagens.toString(); /* return ResponseEntity.ok(tabela); */
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
+            return null; /*return ResponseEntity.internalServerError().build();*/
         }
     }
 
