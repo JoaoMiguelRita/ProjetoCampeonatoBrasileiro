@@ -10,27 +10,28 @@ A API de futebol oferece as seguintes possibilidades de requisições GET:
 
 1. **Obter todos os campeonatos**
     - **Endpoint:** `/campeonatos`
+    - **URL:** `em processo...`
     - **Descrição:** Retorna uma lista de todos os campeonatos disponíveis.
 
 2. **Obter detalhes de um campeonato específico**
     - **Endpoint:** `/campeonatos/{campeonato_id}`
+    - **URL:** `em processo...`
     - **Descrição:** Retorna detalhes do campeonato correspondente ao ID fornecido.
 
 3. **Obter todos os times de um campeonato**
-    - **Endpoint:** `/campeonatos/{campeonato_id}/times`
+    - **Endpoint:** `/campeonatos/{campeonato_id}/tabela`
+    - **URL:** `http://localhost:8080/futebola/campeonato?id=10`
     - **Descrição:** Retorna uma lista de todos os times que participam do campeonato especificado.
 
 4. **Obter detalhes de um time específico**
     - **Endpoint:** `/times/{time_id}`
+    - **URL:** `http://localhost:8080/futebola/time?id=6`
     - **Descrição:** Retorna detalhes do time correspondente ao ID fornecido.
 
-5. **Obter grupos de um campeonato**
+5. **Obter um Atleta específico**
     - **Endpoint:** `/campeonatos/{campeonato_id}/grupos`
-    - **Descrição:** Retorna os grupos participantes do campeonato especificado.
-
-6. **Obter posições de um time em um campeonato**
-    - **Endpoint:** `/campeonatos/{campeonato_id}/posicoes`
-    - **Descrição:** Retorna a posição de todos os times no campeonato especificado.
+    - **URL:** `http://localhost:8080/futebola/atleta?id=564`
+    - **Descrição:** Retorna informações do atleta correspondente ao ID informado.
 
 ## Agradecimentos
 
