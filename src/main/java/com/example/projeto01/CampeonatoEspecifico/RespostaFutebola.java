@@ -1,5 +1,6 @@
 package com.example.projeto01.CampeonatoEspecifico;
 
+import com.example.projeto01.Time;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -328,8 +329,7 @@ public class RespostaFutebola {
     }
 
 
-    public String formatarMensagem() {
-
+    public String formatarMensagemCampeonatoEspecifico() {
         StringBuilder mensagem = new StringBuilder();
             mensagem.append("<div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;'>");
             mensagem.append("<h3>").append(time.getNomePopular()).append(" (").append(time.getSigla()).append(")</h3>");

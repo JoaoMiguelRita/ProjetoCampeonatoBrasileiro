@@ -2,7 +2,7 @@ package com.example.projeto01.Controllers;
 
 import com.example.projeto01.CampeonatoEspecifico.RespostaFutebola;
 import com.example.projeto01.Services.CampeonatoService;
-import com.example.projeto01.CampeonatoEspecifico.Time;
+import com.example.projeto01.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +43,7 @@ public class CampeonatoController {
 
             StringBuilder mensagens = new StringBuilder();
             for (RespostaFutebola resposta : tabela) {
-                mensagens.append(resposta.formatarMensagem()).append("\n\n");
+                mensagens.append(resposta.formatarMensagemCampeonatoEspecifico()).append("\n\n");
             }
 
             if (tabela == null || tabela.isEmpty()) {
@@ -59,46 +59,20 @@ public class CampeonatoController {
         }
     }
 
-    /*
-    @GetMapping("/campeonato")
-    public ResponseEntity<List<RespostaFutebola.CampeonatoResponse>> getCampeonato(@RequestParam int id) {
-        try {
-            System.out.println("Recebendo Campeonato id: " + id);
-            List<RespostaFutebola.CampeonatoResponse> campeonatos = campeonatoService.getEndereco(id);
 
-            // Verificando se o retorno está vindo nulo ou vazio
-            if (campeonatos == null || campeonatos.isEmpty()) {
-                System.out.println("Campeonatos retornaram nulos ou vazios");
-                return ResponseEntity.notFound().build(); // Retorna 404 se não encontrar
-            } else {
-                System.out.println("Retornando dados do campeonato");
-                return ResponseEntity.ok(campeonatos); // Retorna 200 OK com os dados
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Erro Controller");
-            return ResponseEntity.internalServerError().build(); // Retorna 500 em caso de erro
-        }
-    }
-
-     */
-
-    @GetMapping("/times")
-    public ResponseEntity<Time> getTime(@RequestParam int timeId){
+    @GetMapping("/time")
+    public String getTime(@RequestParam int timeId){
         try{
             System.out.println("Rececendo time id: " + timeId);
-            Time time = campeonatoService.getTime(timeId);
 
-            // Verificando se o retorno está vindo nulo ou vazio
-            if (time == null) {
-                System.out.println("Campeonatos retornaram nulos ou vazios");
-                return ResponseEntity.notFound().build(); // Retorna 404 se não encontrar
+            Time time = campeonatoService.getTime(timeId);
+            if (time != null) {
+                return time.formatarMensagemTime(time);
             } else {
-                System.out.println("Retornando dados do campeonato");
-                return ResponseEntity.ok(time); // Retorna 200 OK com os dados
+                return "<h3>Time não encontrado!</h3>";
             }
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
+            return e.getMessage();
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.projeto01.CampeonatoEspecifico;
 
+import com.example.projeto01.Time;
+
 import java.util.List;
 
 
