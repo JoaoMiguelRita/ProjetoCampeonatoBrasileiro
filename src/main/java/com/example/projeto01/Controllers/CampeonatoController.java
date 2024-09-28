@@ -1,6 +1,7 @@
 package com.example.projeto01.Controllers;
 
 import com.example.projeto01.CampeonatoEspecifico.RespostaFutebola;
+import com.example.projeto01.InfAtleta.Atleta;
 import com.example.projeto01.Services.CampeonatoService;
 import com.example.projeto01.Time;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,15 +62,31 @@ public class CampeonatoController {
 
 
     @GetMapping("/time")
-    public String getTime(@RequestParam int timeId){
+    public String getTime(@RequestParam int id){
         try{
-            System.out.println("Rececendo time id: " + timeId);
+            System.out.println("Rececendo time id: " + id);
 
-            Time time = campeonatoService.getTime(timeId);
+            Time time = campeonatoService.getTime(id);
             if (time != null) {
                 return time.formatarMensagemTime(time);
             } else {
                 return "<h3>Time não encontrado!</h3>";
+            }
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+
+    @GetMapping("/atleta")
+    public String getAtleta(@RequestParam int id){
+        try{
+            System.out.println("Rececendo Atleta id: " + id);
+
+            Atleta atleta = campeonatoService.getAtleta(id);
+            if (atleta != null) {
+                return atleta.formatarMensagemAtleta(atleta);
+            } else {
+                return "<h3>Atleta não encontrado!</h3>";
             }
         } catch (Exception e) {
             return e.getMessage();

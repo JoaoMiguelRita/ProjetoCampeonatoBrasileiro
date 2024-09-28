@@ -1,6 +1,7 @@
 package com.example.projeto01.Services;
 
 import com.example.projeto01.CampeonatoEspecifico.RespostaFutebola;
+import com.example.projeto01.InfAtleta.Atleta;
 import com.example.projeto01.Time;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -99,6 +100,25 @@ public class CampeonatoService {
         if (response.statusCode() == 200) {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(response.body(), Time.class);
+        } else {
+            return null;
+        }
+    }
+
+    public Atleta getAtleta(int atletaId) throws IOException, InterruptedException {
+        uri = "/atletas/" + atletaId;
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url + uri))
+                .header("Authorization",  token)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() == 200) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(response.body(), Atleta.class);
         } else {
             return null;
         }
