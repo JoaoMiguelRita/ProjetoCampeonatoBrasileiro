@@ -1,12 +1,22 @@
 package com.example.projeto01;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Time {
+
+    @JsonProperty("time_id")
     private int timeId;
+
+    @JsonProperty("nome_popular")
     private String nomePopular;
+
+    @JsonProperty("sigla")
     private String sigla;
+
+    @JsonProperty("escudo")
     private String escudo;
 
-    // Getters e Setters dnv
+    // Getters e Setters
     public int getTimeId() {
         return timeId;
     }

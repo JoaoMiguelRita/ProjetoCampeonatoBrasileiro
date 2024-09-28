@@ -2,6 +2,7 @@ package com.example.projeto01;
 
 import java.util.List;
 
+
 public class Posicao {
     private int posicao;
     private int pontos;
