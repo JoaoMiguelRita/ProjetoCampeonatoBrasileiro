@@ -2,6 +2,7 @@ package com.example.projeto01.Services;
 
 import com.example.projeto01.CampeonatoEspecifico.RespostaFutebola;
 import com.example.projeto01.InfAtleta.Atleta;
+import com.example.projeto01.ListaCampeonatos.Campeonatos;
 import com.example.projeto01.Time;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,48 +19,15 @@ import java.util.List;
 public class CampeonatoService {
     private String url =  "https://api.api-futebol.com.br/v1";
     private String uri;
-    private String token = "Bearer test_fb3734c3c95c4efdb242ebec588798";
+    private String token = "Bearer live_a8e93c1dbe3173de31684640dbde02"; /* test_fb3734c3c95c4efdb242ebec588798 */
 
-    public List<RespostaFutebola.CampeonatoResponse> getTodosCampeonatos() throws IOException, InterruptedException {
-        List<RespostaFutebola.CampeonatoResponse> campeonatos = null;
+    public List<Campeonatos> getTodosCampeonatos() throws IOException, InterruptedException {
+        uri = "/campeonatos";
+        List<Campeonatos> campeonatos = null;
         try {
+            campeonatos = null;
             HttpClient client = HttpClient.newHttpClient();
 
-            // Montando a requisição com o cabeçalho de autorização
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.api-futebol.com.br/v1/campeonatos/"))
-                    .header("Authorization", "Bearer test_fb3734c3c95c4efdb242ebec588798")
-                    .build();
-
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Resposta da API: " + response.body());
-
-            // Criando o ObjectMapper para deserializar a resposta JSON
-            ObjectMapper objectMapper = new ObjectMapper();
-            campeonatos = objectMapper.readValue(
-                    response.body(),
-                    new TypeReference<List<RespostaFutebola.CampeonatoResponse>>() {}
-            );
-
-            if (campeonatos.isEmpty()) {
-                System.out.println("Resposta vazia da API.");
-                return null; // Retorna nulo ou trate conforme necessário
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Erro - " + e.getMessage());
-        }
-
-        return campeonatos;
-    }
-
-    public List<RespostaFutebola> getEndereco(Integer cod) throws IOException, InterruptedException {
-        List<RespostaFutebola> tabela = null;
-        uri = "/campeonatos/" + cod + "/tabela";
-        try {
-            HttpClient client = HttpClient.newHttpClient();
-
-            // Montando a requisição
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url + uri))
                     .header("Authorization", token)
@@ -68,23 +36,53 @@ public class CampeonatoService {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println("Resposta da API: " + response.body());
 
-            // Deserializando diretamente para a classe RespostaFutebola
             ObjectMapper objectMapper = new ObjectMapper();
-            tabela = objectMapper.readValue(
+            campeonatos = objectMapper.readValue(
                     response.body(),
-                    new TypeReference<List<RespostaFutebola>>() {}
-            );
+                    new TypeReference<List<Campeonatos>>() {
+                    });
 
-            if (tabela.isEmpty()) {
-                System.out.println("Tabela vazia.");
-                return null; // Ou retorne conforme necessidade
+            if (campeonatos.isEmpty()) {
+                System.out.println("Campeonatos está vazio.");
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Erro - " + e.getMessage());
         }
-        return tabela;
+        return campeonatos;
     }
+     public List<RespostaFutebola> getEndereco(Integer cod) throws IOException, InterruptedException {
+         List<RespostaFutebola> tabela = null;
+         uri = "/campeonatos/" + cod + "/tabela";
+         try {
+             HttpClient client = HttpClient.newHttpClient();
+
+             // Montando a requisição
+             HttpRequest request = HttpRequest.newBuilder()
+                     .uri(URI.create(url + uri))
+                     .header("Authorization", token)
+                     .build();
+
+             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+             System.out.println("Resposta da API: " + response.body());
+
+             ObjectMapper objectMapper = new ObjectMapper();
+             tabela = objectMapper.readValue(
+                     response.body(),
+                     new TypeReference<List<RespostaFutebola>>() {}
+             );
+
+             if (tabela.isEmpty()) {
+                 System.out.println("Tabela vazia.");
+                 return null; // Ou retorne conforme necessidade
+             }
+         } catch (Exception e) {
+             e.printStackTrace();
+             System.out.println("Erro - " + e.getMessage());
+         }
+         return tabela;
+     }
 
     public Time getTime(int timeId) throws IOException, InterruptedException {
         uri = "/times/" + timeId;
@@ -112,6 +110,7 @@ public class CampeonatoService {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + uri))
                 .header("Authorization",  token)
+                .GET()
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -120,7 +119,7 @@ public class CampeonatoService {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(response.body(), Atleta.class);
         } else {
-            return null;
+            throw new RuntimeException("Erro ao buscar atleta. Código de resposta: " + response.statusCode());
         }
     }
 }
