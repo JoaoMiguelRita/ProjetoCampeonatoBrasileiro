@@ -6,7 +6,7 @@ Este projeto é uma API de futebol que permite acessar dados sobre o Brasileirã
 
 ## Funcionalidades
 
-A API de futebol oferece as seguintes possibilidades de requisições GET:
+A API de futebol oferece as seguintes possibilidades de requisições GET e POST:
 
 1. **Obter todos os campeonatos**
     - **Endpoint:** `/campeonatos`
