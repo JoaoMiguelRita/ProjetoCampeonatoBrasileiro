@@ -34,6 +34,11 @@ A API de futebol oferece as seguintes possibilidades de requisições GET e POST
     - **Post:** `http://localhost:8080/atletas?id=1&nome_popular=teste&nome=teste1&sigla=tst&nomePosicao=teste`
     - **Descrição:** Retorna informações do atleta correspondente ao ID informado.
 
+6. **Informação sobre o projeto**
+    - **Endpoint:** `/sobre`
+    - **URL:** `http://localhost:8080/sobre`
+    - **Descrição:** Retorna informações sobre o desenvolvedor e projeto.
+
 ## Agradecimentos
 
 Agradecemos sua atenção e interesse na API de futebol. Para mais informações ou suporte, sinta-se à vontade para questionar.
