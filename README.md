@@ -39,6 +39,10 @@ A API de futebol oferece as seguintes possibilidades de requisições GET e POST
     - **URL:** `http://localhost:8080/sobre`
     - **Descrição:** Retorna informações sobre o desenvolvedor e projeto.
 
+**EM CASO DE ERRO:**
+ - Substituir o valor da variável token de  
+_"Bearer live_a8e93c1dbe3173de31684640dbde02"_  para _"test_fb3734c3c95c4efdb242ebec588798"_
+
 ## Agradecimentos
 
 Agradecemos sua atenção e interesse na API de futebol. Para mais informações ou suporte, sinta-se à vontade para questionar.
